@@ -156,6 +156,7 @@ int main (){
     ERR_print_errors_fp(stderr);  
     exit(2);  
   }  
+
   if ((!SSL_CTX_load_verify_locations(ctx,CAFILE,NULL))||(!SSL_CTX_set_default_verify_paths(ctx))){  
     printf("err\n");  
     exit(1);  
@@ -183,6 +184,7 @@ int main (){
   
   s = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);  
   if(s<0) return -1;  
+
   service.sin_family = AF_INET;  
   service.sin_addr.s_addr = inet_addr("127.0.0.1");  
   service.sin_port = htons(11111);  
@@ -226,6 +228,6 @@ int main (){
     }
   }
 
-  SSL_CTX_free (ctx);
+  SSL_CTX_free(ctx);
   return 0;
 }

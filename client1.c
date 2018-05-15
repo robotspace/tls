@@ -55,15 +55,18 @@ int SSL_CTX_use_PrivateKey_file_pass(SSL_CTX *ctx, char *filename, char *pass){
     printf("PEM_read_bio_PrivateKey err");
     return -1;
   }
+
   if (SSL_CTX_use_PrivateKey(ctx,pkey) <= 0){
     printf("SSL_CTX_use_PrivateKey err\n");
     return -1;
   }
+
   BIO_free(key);
   return 1;
 }
 
 static int s_client_verify=SSL_VERIFY_NONE;  
+
 void* thread_main(void *arg){
   int  err,buflen,read;  
   int  sd;  
@@ -102,6 +105,7 @@ again:
     printf("SSL_connect err\n");  
     return NULL;
   }  
+
   printf ("SSL connection using %s\n", SSL_get_cipher (ssl));  
   server_cert = SSL_get_peer_certificate (ssl);        
   printf ("Server certificate:\n");  
@@ -176,6 +180,7 @@ int main (){
   s_client_verify=SSL_VERIFY_PEER|SSL_VERIFY_FAIL_IF_NO_PEER_CERT | SSL_VERIFY_CLIENT_ONCE;
   SSL_CTX_set_verify(ctx,s_client_verify,verify_callback);
   SSL_CTX_load_verify_locations(ctx,CAFILE,NULL);
+
   lock_cs=OPENSSL_malloc(CRYPTO_num_locks() * sizeof(pthread_mutex_t));
   lock_count=OPENSSL_malloc(CRYPTO_num_locks() * sizeof(long));
 
@@ -199,7 +204,7 @@ int main (){
     pthread_join(pid[i],NULL);
   }
 
-  SSL_CTX_free (ctx);
+  SSL_CTX_free(ctx);
   printf("test ok\n");
   return 0;
 }

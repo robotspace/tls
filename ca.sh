@@ -41,7 +41,7 @@ keytool -genkey -keyalg RSA -alias endeca -keypass "123456" -keystore server-tru
 keytool -delete -alias endeca -keystore server-truststore.ks -storepass "123456"
 #导入CA（不需要导入对方公钥。双方基于共同的ＣＡ互相认可对方公钥？）
 keytool -import -v -trustcacerts -alias endeca-ca -file ../ca/ca-cert.pem -keystore server-truststore.ks
-exit 1
+
 cd ../client
 #生成客户端私钥
 openssl genrsa  -out client-key.pem 2048

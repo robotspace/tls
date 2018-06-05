@@ -4,7 +4,7 @@
 ## 脚本介绍
 ### ca.sh
 
-此脚本用来生成签名用到的CA，客户端的公钥和私钥、服务端的公钥和私钥，以及两端要用到的keystore和trust store。这里最大的误解是trust store中需要存入公钥，其实不用，只需CA Chain.
+此脚本用来生成签名用到的CA，客户端的公钥和私钥、服务端的公钥和私钥，以及两端要用到的keystore和trust store。这里最大的误解是trust store中需要存入对方的公钥，其实不用，只需CA的公钥（链）.
 
 ### another-build.sh
 
